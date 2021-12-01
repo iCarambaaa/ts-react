@@ -1,28 +1,41 @@
 import { Form, Container } from "react-bootstrap";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getJobsAction } from "../redux/actions";
+import { FormEvent, useState } from "react";
+import {Song} from "../interfaces/songs"
 
-const Searchbar = () => {
-  const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?search=";
+interface SearchbarProps {     //interface for incoming props
+  songs: Song[];
+  setSongs: (value: Song[]) => void; // this is the way 
+}
+
+
+const Searchbar = ({songs, setSongs}: SearchbarProps) => {
+  const baseEndpoint = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 
   const [query, setQuery] = useState("");
+  
+  
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // const response = await fetch(baseEndpoint + query + "&limit=15");
-    // if (!response.ok) {
-    //   alert("Error fetching results");
-    //   return;
-    // }
-    // const { data } = await response.json();
-    // saveFetchedJobs(data);
-    // console.log(data);
+    try {
 
-    dispatch(getJobsAction(baseEndpoint, query));
+      const response = await fetch(baseEndpoint + query + "&limit=15");
+      if (!response.ok) {
+        alert("Error fetching results");
+        return;
+      }
+      const { data } = await response.json();
+      
+      console.log(data);
+
+      setSongs(data)
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+    
   };
 
   return (
@@ -31,7 +44,7 @@ const Searchbar = () => {
         <Form.Group>
           {/* <Form.Label>Search & Find</Form.Label> */}
           <Form.Text className="text-muted">
-            Want to be a productive human beeing? Get a job and pay some taxes.
+            Search & Find Your Favourite Tracks 
           </Form.Text>
           <Form.Control
             type="search"

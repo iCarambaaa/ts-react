@@ -1,33 +1,32 @@
 import { Link } from "react-router-dom";
-import { Star, StarFill } from "react-bootstrap-icons";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addToFavouritesAction,
-  removeFromFavouritesAction,
-  setSelectedJobAction,
-} from "../redux/actions";
+//import { Star, StarFill } from "react-bootstrap-icons";
+import {Song} from "../interfaces/songs"
 
-const SingleListElement = ({ job, index, key }) => {
-  const favourites = useSelector((state) => state.favourites.favourites);
-  const dispatch = useDispatch();
-  const isFav = favourites.includes(job.company_name);
+interface SingleListElementProps {
+  song: Song
+  key: number
+}
 
-  const toggleFavourite = () => {
-    isFav
-      ? dispatch(removeFromFavouritesAction(job.company_name))
-      : dispatch(addToFavouritesAction(job.company_name));
-  };
+const SingleListElement = ({ song, key }:SingleListElementProps) => {
+ 
+ // const isFav = favourites.includes(job.company_name);
+
+  // const toggleFavourite = () => {
+  //   isFav
+  //     ? dispatch(removeFromFavouritesAction(job.company_name))
+  //     : dispatch(addToFavouritesAction(job.company_name));
+  // };
 
   return (
     <li key={key}>
       <Link
-        onClick={() => dispatch(setSelectedJobAction(job))}
-        to={`/${job.company_name}`}
+        // onClick={() => dispatch(setSelectedJobAction(job))}
+        to={`/}`}
       >
-        {job.company_name}
+        {song.title}
       </Link>
-      , {job.title}{" "}
-      {isFav ? (
+      , {song.artist.name}{" "}
+      {/* {isFav ? (
         <StarFill
           color="gold"
           size={16}
@@ -41,7 +40,7 @@ const SingleListElement = ({ job, index, key }) => {
           className="me-4 my-auto"
           onClick={toggleFavourite}
         />
-      )}
+      )} */}
     </li>
   );
 };
