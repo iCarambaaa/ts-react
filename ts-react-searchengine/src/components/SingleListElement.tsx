@@ -4,10 +4,10 @@ import {Song} from "../interfaces/songs"
 
 interface SingleListElementProps {
   song: Song
-  key: number
+  
 }
 
-const SingleListElement = ({ song, key }:SingleListElementProps) => {
+const SingleListElement = ({ song }:SingleListElementProps) => {
  
  // const isFav = favourites.includes(job.company_name);
 
@@ -16,12 +16,12 @@ const SingleListElement = ({ song, key }:SingleListElementProps) => {
   //     ? dispatch(removeFromFavouritesAction(job.company_name))
   //     : dispatch(addToFavouritesAction(job.company_name));
   // };
-
+console.log(song.id)
   return (
-    <li key={key}>
+    <li key={song.id}>
       <Link
         // onClick={() => dispatch(setSelectedJobAction(job))}
-        to={`/}`}
+        to={`/track/${song.id}`}
       >
         {song.title}
       </Link>

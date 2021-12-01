@@ -14,7 +14,7 @@ const SongList = ({songs}: SongListProps) => {
     <div>
       <ul>
         {songs.map((song) => (
-          <SingleListElement song={song} key={song.id} />
+          <SingleListElement song={song} />
         ))}
       </ul>
     </div>
