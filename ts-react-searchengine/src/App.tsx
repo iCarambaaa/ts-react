@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import { Col, Container, Row } from "react-bootstrap";
+import Home from "./components/Home";
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Container fluid>
+      <Row>
+        <Col sm={12} className="text-center background-div App App-header">
+          <Link to="/">
+            <h1 className="App-link">Human Resource Mashine</h1>
+          </Link>
+          <Link to="/favourites">
+            <h6 style={{color: 'lightgrey'}} className="App-link">&#11088; Favourites &#11088;</h6>
+          </Link>
+        </Col>
+        {/* <Home /> */}
+      </Row>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        {/* <Route path='/favourites' element={<Favourites />} />
+        <Route path='/:companyName' element={<SingleJobOffer />} /> */}
+        <Route path='*' element={<h1>404 - Not Found</h1>} />
+      </Routes>
+    </Container>
+  </BrowserRouter>
   );
 }
 
